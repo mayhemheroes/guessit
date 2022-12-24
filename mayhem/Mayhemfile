@@ -1,7 +1,8 @@
-project: guessit 
+project: guessit
 target: fuzz-guessit
 
 image: ghcr.io/matl4c/fuzz-guessit:latest
 
 cmds:
-  - cmd: guessit @@
+  - cmd: /src/mayhem/fuzz-guessit.py
+    libfuzzer: true

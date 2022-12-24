@@ -1,13 +1,12 @@
-FROM python:3.7-alpine
+FROM fuzzers/atheris:2.0.7-python3.9
 
-MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
+RUN apt-get update
 
-WORKDIR /root
+ADD . /src
+WORKDIR /src
 
-COPY / /root/guessit/
-WORKDIR /root/guessit/
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install guessit
+RUN chmod +x /src/mayhem/fuzz-guessit.py
 
-RUN pip install -e .
-
-ENTRYPOINT ["guessit"]
-
+CMD ["/src/mayhem/fuzz-guessit.py"]
